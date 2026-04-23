@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahad Ullah — Mechanical Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --silver: #C0C0C0;
+    --silver-light: #E8E8E8;
+    --silver-dark: #888;
+    --obsidian: #0a0a0a;
+    --carbon: #111;
+    --graphite: #1a1a1a;
+    --chrome: #d4d4d4;
+    --accent: #C0A060;
+    --accent-dim: #8a6f3e;
+    --white: #f5f5f5;
+    --text-muted: #777;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(192,160,96,0.3);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--carbon); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--chrome); }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 60px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.98), transparent);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    color: var(--chrome);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 48px; list-style: none; }
+  .nav-links a {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--silver-dark);
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--chrome); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links .nav-cta {
+    padding: 8px 20px;
+    border: 1px solid rgba(192,160,96,0.5);
+    color: var(--accent);
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+  .nav-links .nav-cta::after { display: none; }
+  .nav-links .nav-cta:hover { background: rgba(192,160,96,0.1); color: var(--chrome); border-color: var(--accent); }
+
+  /* ---- HERO ---- */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(192,160,96,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 80% at 20% 30%, rgba(192,192,192,0.03) 0%, transparent 50%),
+      linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0d0d0d 100%);
+  }
+
+  /* Mercedes star pattern */
+  .star-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image:
+      radial-gradient(circle, var(--silver) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Animated ring */
+  .hero-ring {
+    position: absolute;
+    right: -10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 700px;
+    height: 700px;
+    border: 1px solid rgba(192,160,96,0.12);
+    border-radius: 50%;
+    animation: slowSpin 30s linear infinite;
+  }
+  .hero-ring::before {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border: 1px solid rgba(192,192,192,0.06);
+    border-radius: 50%;
+  }
+  .hero-ring::after {
+    content: '';
+    position: absolute;
+    inset: 100px;
+    border: 1px solid rgba(192,160,96,0.08);
+    border-radius: 50%;
+  }
+
+  @keyframes slowSpin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 8vw, 96px);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--chrome);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 6px;
+    color: var(--silver-dark);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--silver-dark);
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s forwards;
+  }
+
+  .btn-primary {
+    padding: 14px 36px;
+    background: var(--accent);
+    color: var(--obsidian);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover {
+    background: var(--chrome);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    padding: 14px 36px;
+    border: 1px solid rgba(192,160,96,0.4);
+    color: var(--accent);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    background: rgba(192,160,96,0.08);
+  }
+
+  .hero-stats {
+    position: absolute;
+    right: 60px;
+    bottom: 60px;
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.3s forwards;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ---- SECTION COMMON ---- */
+  section { padding: 100px 60px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+  .section-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 3px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--chrome);
+    letter-spacing: 2px;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(192,160,96,0.3), transparent);
+  }
+
+  /* ---- ABOUT / EDUCATION ---- */
+  #education { background: var(--carbon); }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .edu-card {
+    border: 1px solid rgba(192,192,192,0.08);
+    padding: 40px;
+    background: rgba(255,255,255,0.02);
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+  }
+  .edu-card:hover { border-color: rgba(192,160,96,0.3); }
+
+  .edu-tag {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .edu-uni {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--chrome);
+    margin-bottom: 8px;
+  }
+  .edu-degree {
+    font-size: 14px;
+    color: var(--silver-dark);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  .edu-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-dim);
+    letter-spacing: 2px;
+  }
+
+  .about-text {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--silver-dark);
+    line-height: 1.9;
+  }
+
+  .skills-wrap { margin-top: 40px; }
+  .skills-title {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .skill-tag {
+    padding: 6px 16px;
+    border: 1px solid rgba(192,192,192,0.12);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--silver-dark);
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.02);
+    transition: all 0.3s;
+  }
+  .skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(192,160,96,0.05);
+  }
+
+  /* ---- WORK EXPERIENCE ---- */
+  #experience { background: var(--graphite); }
+
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+  }
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .timeline-dot {
+    position: absolute;
+    left: -46px;
+    top: 6px;
+    width: 12px; height: 12px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    background: var(--obsidian);
+  }
+  .timeline-dot::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .exp-period {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--accent-dim);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--chrome);
+    margin-bottom: 4px;
+  }
+  .exp-company {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .exp-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--silver-dark);
+    line-height: 1.8;
+  }
+
+  /* ---- PROJECTS ---- */
+  #projects { background: var(--carbon); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: var(--graphite);
+    cursor: none;
+  }
+  .project-card.wide {
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+  }
+
+  .project-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%) brightness(0.7);
+    transition: all 0.6s ease;
+    display: block;
+  }
+  .project-card:hover img {
+    filter: grayscale(0%) brightness(0.85);
+    transform: scale(1.05);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+    transition: all 0.4s;
+  }
+
+  .project-cat {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--chrome);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--silver-dark);
+    line-height: 1.6;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .project-card:hover .project-desc {
+    opacity: 1;
+    max-height: 200px;
+  }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.4s 0.1s;
+  }
+  .project-card:hover .project-link { opacity: 1; }
+  .project-link::after {
+    content: '→';
+    font-size: 14px;
+  }
+
+  /* placeholder for images that are screenshots */
+  .project-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--graphite), var(--carbon));
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    color: rgba(192,160,96,0.15);
+  }
+
+  /* ---- CERTIFICATIONS ---- */
+  #certifications { background: var(--obsidian); }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .cert-card {
+    border: 1px solid rgba(192,192,192,0.08);
+    padding: 32px 36px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.015);
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .cert-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(192,160,96,0.04), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .cert-card:hover {
+    border-color: rgba(192,160,96,0.25);
+    transform: translateY(-4px);
+  }
+  .cert-card:hover::after { opacity: 1; }
+
+  .cert-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    opacity: 0.8;
+  }
+  .cert-issuer {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .cert-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--chrome);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .cert-platform {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+  .cert-view-hint {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent-dim);
+    margin-top: 10px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .cert-card:hover .cert-view-hint { color: var(--accent); }
+  .cert-card { cursor: none; }
+
+  /* ---- CONTACT ---- */
+  #contact { background: var(--carbon); }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-left .contact-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--chrome);
+    margin-bottom: 24px;
+  }
+  .contact-left .contact-heading em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .contact-subtext {
+    font-size: 15px;
+    color: var(--silver-dark);
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .contact-items { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 1px solid rgba(192,192,192,0.07);
+    text-decoration: none;
+    background: rgba(255,255,255,0.02);
+    transition: all 0.3s;
+  }
+  .contact-item:hover {
+    border-color: rgba(192,160,96,0.3);
+    background: rgba(192,160,96,0.04);
+    transform: translateX(6px);
+  }
+  .contact-item-icon {
+    font-size: 18px;
+    width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .contact-item-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .contact-item-value {
+    font-size: 14px;
+    color: var(--chrome);
+  }
+
+  /* Three-pointed star SVG decoration */
+  .mercedes-star {
+    width: 200px; height: 200px;
+    opacity: 0.06;
+    position: absolute;
+    right: 60px;
+    bottom: 60px;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--obsidian);
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .footer-copy {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--accent-dim);
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Divider */
+  .divider {
+    width: 60px; height: 1px;
+    background: var(--accent);
+    margin: 24px 0;
+  }
+
+  /* mobile hamburger - simple approach */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    #hero { padding: 0 24px; }
+    .hero-stats { right: 24px; bottom: 40px; gap: 24px; }
+    .stat-num { font-size: 28px; }
+    .edu-grid { grid-template-columns: 1fr; gap: 32px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.wide { grid-column: span 1; }
+    .certs-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-ring { width: 400px; height: 400px; right: -30%; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">M<span>.</span>Ullah</div>
+  <ul class="nav-links">
+    <li><a href="#projects">View Projects</a></li>
+    <li><a href="#experience">View Work Experience</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="star-grid"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">— Mechanical Engineer & Automotive Enthusiast</p>
+    <h1 class="hero-name">Mahad<br><em>Ullah</em></h1>
+    <p class="hero-title">B.Sc. Mechanical Engineering · NUTECH · 8th Semester</p>
+    <p class="hero-desc">
+      Precision-driven mechanical engineer with a passion for automotive systems, 
+      CAD excellence, and design for manufacturing. Turning complex engineering 
+      challenges into refined, manufacturable solutions — one model at a time.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#experience" class="btn-secondary">View Work Experience</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">CAD Projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Certifications</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Internships</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <p class="edu-tag">Undergraduate Degree</p>
+      <h3 class="edu-uni">National University of Technology</h3>
+      <p class="edu-degree">Bachelor of Science in Mechanical Engineering<br>Islamabad, Pakistan</p>
+      <p class="edu-date">Graduating July 2026 &nbsp;·&nbsp; 8th Semester</p>
+
+      <div class="skills-wrap">
+        <p class="skills-title">Technical Arsenal</p>
+        <div class="skills-list">
+          <span class="skill-tag">SolidWorks</span>
+          <span class="skill-tag">ANSYS</span>
+          <span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">Solid Edge</span>
+          <span class="skill-tag">Fusion 360</span>
+          <span class="skill-tag">CNC Machining</span>
+          <span class="skill-tag">Machine Design</span>
+          <span class="skill-tag">Manufacturing</span>
+          <span class="skill-tag">Arduino</span>
+          <span class="skill-tag">Project Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="about-text">
+        A passionate mechanical engineer currently in his final year at NUTECH, 
+        Islamabad — specializing in CAD/CAM design, structural analysis, and 
+        automotive engineering. With hands-on experience at the NUTECH Innovation 
+        Centre and NAVTTC, Mahad brings both academic rigour and practical craftsmanship 
+        to every project.
+      </p>
+      <div class="divider"></div>
+      <p class="about-text">
+        An automotive enthusiast at heart, Mahad's design philosophy mirrors the 
+        precision and elegance found in high-performance engineering — where every 
+        component serves a purpose, and every tolerance matters.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="exp-period">January 2026 — Present</p>
+      <h3 class="exp-role">Internship · CNC Machine Operator & Design Engineer</h3>
+      <p class="exp-company">NAVTTC &nbsp;·&nbsp; Islamabad, Pakistan</p>
+      <p class="exp-desc">
+        Working as a CNC machine operator alongside design engineering responsibilities. 
+        Gained hands-on experience in precision manufacturing, G-code programming, 
+        and translating CAD models into machined components. Designed and modeled 
+        custom mechanical components including a lobed plate with a focus on 
+        manufacturability and geometric precision.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="exp-period">July 2025 — September 2025</p>
+      <h3 class="exp-role">Internship · CNC & Design Engineer</h3>
+      <p class="exp-company">NUTECH Innovation Centre &nbsp;·&nbsp; Islamabad, Pakistan</p>
+      <p class="exp-desc">
+        Developed advanced CAD models and design solutions at NUTECH's innovation hub. 
+        Created complex automotive components including a performance exhaust manifold 
+        and 4-cylinder engine assembly using SolidWorks. Applied surface modelling 
+        techniques for high-fidelity geometries and performed design-for-manufacturing 
+        analysis on multiple components.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Exhaust Manifold -->
+    <div class="project-card wide reveal">
+      <img src="exhaust_manifold.png" alt="Exhaust Manifold" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-placeholder" style="display:none">⚙</div>
+      <div class="project-overlay">
+        <p class="project-cat">NUTECH Innovation Centre &nbsp;·&nbsp; Automotive CAD</p>
+        <h3 class="project-name">Performance Exhaust Manifold</h3>
+        <p class="project-desc">Modeled a high-performance exhaust manifold in SolidWorks using sweep and pattern features to achieve precision equal-length runners. Highlights expertise in CAD modeling, design for manufacturing, and automotive component development.</p>
+        <a href="https://www.linkedin.com/posts/mahad-ullah-a643a0370_solidworks-caddesign-3dmodeling-activity-7367873905933369345-nlfL" target="_blank" class="project-link">View on LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Rim -->
+    <div class="project-card reveal">
+      <img src="17_5_inch_automotive_rim.png" alt="Automotive Rim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-placeholder" style="display:none">◎</div>
+      <div class="project-overlay">
+        <p class="project-cat">Automotive Design</p>
+        <h3 class="project-name">17.5" Automotive Rim</h3>
+        <p class="project-desc">Carbon steel multi-spoke rim designed in SolidWorks using revolve, cut-extrude, and circular pattern operations. Optimized for aerodynamics, aesthetics, and structural strength.</p>
+        <a href="https://www.linkedin.com/posts/mahad-ullah-a643a0370_this-is-a-175-inch-automotive-rim-designed-activity-7360578430129623041-xsMy" target="_blank" class="project-link">View on LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- 4-cylinder engine -->
+    <div class="project-card reveal">
+      <img src="4-cylinder_engine.png" alt="4-Cylinder Engine" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-placeholder" style="display:none">🔩</div>
+      <div class="project-overlay">
+        <p class="project-cat">NUTECH Innovation Centre &nbsp;·&nbsp; Assembly</p>
+        <h3 class="project-name">4-Cylinder Engine Assembly</h3>
+        <p class="project-desc">Full engine assembly using surface modelling for complex geometries. Blended mechanical precision with advanced modelling for realistic aesthetics and functional accuracy.</p>
+        <a href="https://www.linkedin.com/posts/mahad-ullah-a643a0370_solidworks-surfacemodelling-mechanicaldesign-activity-7359455299918860289-YQVJ" target="_blank" class="project-link">View on LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Cart project -->
+    <div class="project-card wide reveal">
+      <img src="cart.jpeg" alt="3-Tier Cart" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-placeholder" style="display:none">⬛</div>
+      <div class="project-overlay">
+        <p class="project-cat">NAVTTC &nbsp;·&nbsp; Structural Design & DFM</p>
+        <h3 class="project-name">3-Tier Utility Cart — 200 kg Capacity</h3>
+        <p class="project-desc">Designed and developed a complete 3-tier utility cart in mild steel with a 200 kg load capacity. Focused on DFM, material selection, and ANSYS structural simulation (von-Mises max: 72 MPa). Comprises a custom tray, vertical beams, handle, and caster wheels — modeled and assembled entirely in SolidWorks.</p>
+        <a href="https://www.linkedin.com/posts/mahad-ullah-a643a0370_mechanicalengineering-design-dfm-activity-7442446824927387649-dsqX" target="_blank" class="project-link">View on LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Lobed plate -->
+    <div class="project-card reveal">
+      <img src="custom_lobe_plate.png" alt="Custom Lobed Plate" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="project-placeholder" style="display:none">✦</div>
+      <div class="project-overlay">
+        <p class="project-cat">NAVTTC &nbsp;·&nbsp; Precision Component</p>
+        <h3 class="project-name">Custom Lobed Plate</h3>
+        <p class="project-desc">Precision lobed plate designed in SolidWorks with focus on symmetry, hole alignment, and clean geometry for real-world fabrication. Reflects attention to detail and production-ready design.</p>
+        <a href="https://www.linkedin.com/posts/mahad-ullah-a643a0370_mechanicalengineering-solidworks-designengineering-activity-7442450501205520385-4neF" target="_blank" class="project-link">View on LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Compressed Air Car -->
+    <div class="project-card reveal">
+      <div class="project-placeholder">💨</div>
+      <div class="project-overlay">
+        <p class="project-cat">NUTECH &nbsp;·&nbsp; ICAT-II University Project</p>
+        <h3 class="project-name">Compressed Air Car</h3>
+        <p class="project-desc">Pollution-free vehicle powered by compressed air. Integrated pneumatic actuators, solenoid valves, and Arduino control logic. 3D models in SolidWorks with full system simulation.</p>
+      </div>
+    </div>
+
+    <!-- Hydraulic Arm -->
+    <div class="project-card wide reveal">
+      <div class="project-placeholder">🦾</div>
+      <div class="project-overlay">
+        <p class="project-cat">NUTECH &nbsp;·&nbsp; ICAT-I University Project</p>
+        <h3 class="project-name">Hydraulic Manipulator Arm</h3>
+        <p class="project-desc">Hydraulic pick-and-place manipulator arm modeled in Fusion 360. Aluminium/steel frame with full hydraulic system: actuators, power pack, directional/flow control valves, pressure relief valves, and digital pressure gauges for safe, controlled operation.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PDF MODAL -->
+<div id="pdfModal" style="display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.92); align-items:center; justify-content:center; flex-direction:column;">
+  <div style="position:relative; width:90%; max-width:900px; height:85vh; background:var(--carbon); border:1px solid rgba(192,160,96,0.25);">
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid rgba(255,255,255,0.06);">
+      <span id="modalTitle" style="font-family:'Rajdhani',sans-serif; font-size:12px; letter-spacing:3px; color:var(--accent); text-transform:uppercase;"></span>
+      <button onclick="closePdfModal()" style="background:none; border:1px solid rgba(192,160,96,0.3); color:var(--accent); font-family:'Rajdhani',sans-serif; font-size:11px; letter-spacing:3px; padding:8px 20px; cursor:none; text-transform:uppercase; transition:all 0.3s;" onmouseover="this.style.background='rgba(192,160,96,0.1)'" onmouseout="this.style.background='none'">✕ Close</button>
+    </div>
+    <iframe id="pdfFrame" src="" style="width:100%; height:calc(100% - 57px); border:none;"></iframe>
+  </div>
+</div>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header reveal">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="certs-grid">
+    <div class="cert-card reveal" onclick="openPdfModal('Solid_Edge_Certificate.pdf','Introduction to Solid Edge — Siemens')">
+      <div class="cert-icon">🏭</div>
+      <div>
+        <p class="cert-issuer">Siemens &nbsp;·&nbsp; Coursera</p>
+        <h3 class="cert-name">Introduction to Solid Edge</h3>
+        <p class="cert-platform">March 2025 &nbsp;·&nbsp; Verified Certificate</p>
+        <p class="cert-view-hint">Click to view certificate →</p>
+      </div>
+    </div>
+
+    <div class="cert-card reveal" onclick="openPdfModal('Digitalization_in_aerospace.pdf','Digitalisation in Aeronautics — TU Munich')">
+      <div class="cert-icon">✈️</div>
+      <div>
+        <p class="cert-issuer">TU Munich &nbsp;·&nbsp; Coursera</p>
+        <h3 class="cert-name">Digitalisation in Aeronautics</h3>
+        <p class="cert-platform">May 2025 &nbsp;·&nbsp; Verified Certificate</p>
+        <p class="cert-view-hint">Click to view certificate →</p>
+      </div>
+    </div>
+
+    <div class="cert-card reveal" onclick="openPdfModal('basics_of_air_conditioning.pdf','Basics of Air Conditioning & Heat Load Calculation — L&T EduTech')">
+      <div class="cert-icon">❄️</div>
+      <div>
+        <p class="cert-issuer">L&amp;T EduTech &nbsp;·&nbsp; Coursera</p>
+        <h3 class="cert-name">Basics of Air Conditioning &amp; Heat Load Calculation</h3>
+        <p class="cert-platform">May 2025 &nbsp;·&nbsp; Verified Certificate</p>
+        <p class="cert-view-hint">Click to view certificate →</p>
+      </div>
+    </div>
+
+    <div class="cert-card reveal" onclick="openPdfModal('Ventilation_Life_Safety_Smoke_Extraction.pdf','Ventilation, Life Safety & Smoke Extraction in Building — L&T EduTech')">
+      <div class="cert-icon">🌬️</div>
+      <div>
+        <p class="cert-issuer">L&amp;T EduTech &nbsp;·&nbsp; Coursera</p>
+        <h3 class="cert-name">Ventilation, Life Safety &amp; Smoke Extraction in Building</h3>
+        <p class="cert-platform">June 2025 &nbsp;·&nbsp; Verified Certificate</p>
+        <p class="cert-view-hint">Click to view certificate →</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="position:relative; overflow:hidden;">
+  <div class="section-header reveal">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <h3 class="contact-heading">Let's <em>Engineer</em><br>Something<br>Great</h3>
+      <p class="contact-subtext">
+        Open to internship opportunities, collaborative projects, 
+        and conversations about automotive engineering and mechanical design.
+      </p>
+    </div>
+
+    <div class="contact-items reveal">
+      <a href="tel:+923335439931" class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div>
+          <p class="contact-item-label">Phone</p>
+          <p class="contact-item-value">+92-333-5439931</p>
+        </div>
+      </a>
+      <a href="mailto:mahadullah2003@gmail.com" class="contact-item">
+        <div class="contact-item-icon">✉️</div>
+        <div>
+          <p class="contact-item-label">Email</p>
+          <p class="contact-item-value">mahadullah2003@gmail.com</p>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/mahad-ullah-a643a0370" target="_blank" class="contact-item">
+        <div class="contact-item-icon">💼</div>
+        <div>
+          <p class="contact-item-label">LinkedIn</p>
+          <p class="contact-item-value">linkedin.com/in/mahad-ullah-a643a0370</p>
+        </div>
+      </a>
+      <a href="https://maps.google.com/?q=Islamabad,Pakistan" target="_blank" class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <p class="contact-item-label">Location</p>
+          <p class="contact-item-value">Islamabad, Pakistan</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mercedes three-pointed star SVG -->
+  <svg class="mercedes-star" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M100,10 L115,90 L190,160 L100,130 L10,160 L85,90 Z" fill="currentColor"/>
+  </svg>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">© 2025 Mahad Ullah &nbsp;·&nbsp; Mechanical Engineer</p>
+  <p class="footer-brand">Designed with Precision</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+      ring.style.transform = 'translate(-50%,-50%) scale(0.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.transform = 'translate(-50%,-50%) scale(1)';
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
+
+  // PDF Modal
+  function openPdfModal(file, title) {
+    const modal = document.getElementById('pdfModal');
+    document.getElementById('pdfFrame').src = file;
+    document.getElementById('modalTitle').textContent = title;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closePdfModal() {
+    const modal = document.getElementById('pdfModal');
+    modal.style.display = 'none';
+    document.getElementById('pdfFrame').src = '';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('pdfModal').addEventListener('click', function(e) {
+    if (e.target === this) closePdfModal();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePdfModal(); });
+
+  document.querySelectorAll('.timeline-item').forEach((item, i) => {
+    item.style.transitionDelay = (i * 0.15) + 's';
+  });
+</script>
+</body>
+</html>
